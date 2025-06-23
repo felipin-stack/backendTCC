@@ -1,6 +1,5 @@
 package com.itb.inf2am.pizzaria.model;
 
-
 import jakarta.persistence.*;
 
 @Entity
@@ -13,24 +12,19 @@ public class Cliente {
 
     @Column(nullable = false, length = 100)
     private String nome;
-    @Column(nullable = true, length = 20)
-    private String telefone;
-    @Column(nullable = true, length = 100)
-    private String logradouro;
-    @Column(nullable = true, length = 10)
-    private String numero;
-    @Column(nullable = true, length = 100)
-    private String complemento;
-    @Column(nullable = true, length = 8)
-    private String cep;
-    @Column(nullable = true, length = 50)
-    private String bairro;
-    @Column(nullable = true, length = 50)
-    private String cidade;
-    @Column(nullable = false, length = 10)
-    private String statusCliente;
 
-    // Atributos de apoio
+    @Column(nullable = false, length = 255, unique = true)
+    private String email;
+
+    @Column(nullable = false, length = 255, unique = true)
+    private String senha;
+
+    @Column(nullable = true, length = 8, unique = true)
+    private String cep;
+
+    @Column(nullable = true, length = 20, unique = true)
+    private String telefone;
+
 
     @Transient
     private String message = "";
@@ -38,6 +32,10 @@ public class Cliente {
     @Transient
     private boolean isValid = true;
 
+    // Construtor padrão
+    public Cliente() {}
+
+    // Getters e Setters
     public Integer getId() {
         return id;
     }
@@ -45,7 +43,7 @@ public class Cliente {
     public void setId(Integer id) {
         this.id = id;
     }
-
+   //NOME
     public String getNome() {
         return nome;
     }
@@ -53,39 +51,23 @@ public class Cliente {
     public void setNome(String nome) {
         this.nome = nome;
     }
-
-    public String getTelefone() {
-        return telefone;
+   //EMAIL
+    public String getEmail() {
+        return email;
     }
 
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
+    public void setEmail(String email) {
+        this.email = email;
+    }
+   //SENHA
+    public String getSenha() {
+        return senha;
     }
 
-    public String getLogradouro() {
-        return logradouro;
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
-
-    public void setLogradouro(String logradouro) {
-        this.logradouro = logradouro;
-    }
-
-    public String getNumero() {
-        return numero;
-    }
-
-    public void setNumero(String numero) {
-        this.numero = numero;
-    }
-
-    public String getComplemento() {
-        return complemento;
-    }
-
-    public void setComplemento(String complemento) {
-        this.complemento = complemento;
-    }
-
+   //CEP
     public String getCep() {
         return cep;
     }
@@ -93,37 +75,23 @@ public class Cliente {
     public void setCep(String cep) {
         this.cep = cep;
     }
+//TELEFONE
+public String getTelefone() {
+    return telefone;
+}
 
-    public String getBairro() {
-        return bairro;
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
     }
 
-    public void setBairro(String bairro) {
-        this.bairro = bairro;
-    }
-
-    public String getCidade() {
-        return cidade;
-    }
-
-    public void setCidade(String cidade) {
-        this.cidade = cidade;
-    }
-
-    public String getStatusCliente() {
-        return statusCliente;
-    }
-
-    public void setStatusCliente(String statusCliente) {
-        this.statusCliente = statusCliente;
-    }
-
+    //message
     public String getMessage() {
         return message;
     }
 
     public boolean validarCliente() {
-
+        // Implementar validação real aqui
         return isValid;
     }
 }
+
