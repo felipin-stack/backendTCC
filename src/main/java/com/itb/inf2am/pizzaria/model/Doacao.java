@@ -80,6 +80,7 @@ public class Doacao {
         this.descricao = descricao;
     }
 
+
     public String getMessage() {
         return message;
     }

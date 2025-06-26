@@ -2,6 +2,7 @@ package com.itb.inf2am.pizzaria.controller;
 
 import com.itb.inf2am.pizzaria.exceptions.BadRequest;
 import com.itb.inf2am.pizzaria.model.Cliente;
+import com.itb.inf2am.pizzaria.repository.ClienteRepository;
 import com.itb.inf2am.pizzaria.services.ClienteService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,9 +14,11 @@ import java.util.List;
 public class FuncionarioController {
 
     private final ClienteService clienteService;
+    private final ClienteRepository clienteRepository;
 
-    public FuncionarioController(ClienteService clienteService) {
+    public FuncionarioController(ClienteService clienteService, ClienteRepository clienteRepository) {
         this.clienteService = clienteService;
+        this.clienteRepository = clienteRepository;
     }
 
     @GetMapping
@@ -48,6 +51,10 @@ public class FuncionarioController {
             throw new BadRequest("'" + id + "' não é um número inteiro válido. Por favor, forneça um valor inteiro, como 15. ");
         }
 
+    }
+    @GetMapping("/total")
+    public long totalClientes(){
+        return clienteRepository.count();
     }
 
 }

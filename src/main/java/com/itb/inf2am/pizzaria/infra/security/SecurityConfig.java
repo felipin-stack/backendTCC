@@ -32,7 +32,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
                         .requestMatchers(HttpMethod.POST, "/auth/register").permitAll()
-
+                        .requestMatchers(HttpMethod.GET, "/total").permitAll()
                         .requestMatchers(HttpMethod.GET, "/cliente/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/cliente/**").permitAll()
                         .requestMatchers(HttpMethod.PUT, "/cliente/**").permitAll()
@@ -40,6 +40,9 @@ public class SecurityConfig {
 
                         .requestMatchers(HttpMethod.GET, "/doacao/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/doacao/**").permitAll()
+                        .requestMatchers(HttpMethod.DELETE, "/doacao/**").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/doacao/**").permitAll()
+
 
                         .anyRequest().authenticated()
                 )
