@@ -1,6 +1,7 @@
 package com.itb.inf2am.pizzaria.model;
 
 import jakarta.persistence.*;
+import org.springframework.http.HttpMethod;
 
 @Entity
 @Table(name = "Doacao")
@@ -24,6 +25,10 @@ public class Doacao {
 
     @Column(nullable = false, length = 350)
     private String descricao;
+
+    @Lob
+    @Column(name = "imagem", columnDefinition = "VARBINARY(MAX)")
+    private byte[] imagem;
 
 
     @Transient
@@ -80,6 +85,14 @@ public class Doacao {
         this.descricao = descricao;
     }
 
+
+    public byte[] getImagem() {
+        return imagem;
+    }
+
+    public void setImagem(byte[] imagem) {
+        this.imagem = imagem;
+    }
 
     public String getMessage() {
         return message;

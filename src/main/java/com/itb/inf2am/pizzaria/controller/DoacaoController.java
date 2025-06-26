@@ -58,4 +58,28 @@ public class DoacaoController {
 
     }
 
+    @PostMapping("/{id}/imagem")
+    public ResponseEntity<Doacao> uploadImagem(
+            @PathVariable Integer id,
+            @RequestParam("imagem") MultipartFile imagem) throws IOException {
+        Doacao doacao = doacaoService.listarDoacaoPorId(id);
+        if (doacao == null) {
+            return ResponseEntity.notFound().build();
+        }
+        doacao.setImagem(imagem.getBytes());
+        Doacao salvo = doacaoService.salvarDoacao(doacao);
+        return ResponseEntity.ok(salvo);
+    }
+
+    // GET para retornar a imagem
+    @GetMapping("/{id}/imagem")
+    public ResponseEntity<byte[]> getImagem(@PathVariable Integer id) {
+        Doacao doacao = doacaoService.listarDoacaoPorId(id);
+        if (doacao == null || doacao.getImagem() == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_TYPE, MediaType.IMAGE_JPEG_VALUE)
+                .body(doacao.getImagem());
+    }
 }
